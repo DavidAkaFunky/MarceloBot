@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import praw
 import random
+from os import listdir
 
 client = commands.Bot(command_prefix='marcelo ')
 citações = ["Um comentador é tanto melhor quanto estuda e se informa dos temas e melhor comunica. Até porque a ideia de querer acertar à força leva a que os comentadores se irritem com a realidade, quando ela não se move de acordo com os cenários que traçaram, para poderem ter razão.",
@@ -63,5 +64,12 @@ async def vitória(ctx):
     await join(ctx)
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
     voice.play(discord.FFmpegPCMAudio("Vitória.mp3"))
+
+@client.command()
+async def selfie(ctx):
+    selfies = listdir("Selfies")
+    i = random.randint(0, len(selfies) - 1)
+    await ctx.send(file=discord.File("Selfies/" + selfies[i]))
+
 
 client.run(info[3])
