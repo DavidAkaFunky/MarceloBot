@@ -7,7 +7,7 @@ client = commands.Bot(command_prefix='marcelo ')
 citações = ["Um comentador é tanto melhor quanto estuda e se informa dos temas e melhor comunica. Até porque a ideia de querer acertar à força leva a que os comentadores se irritem com a realidade, quando ela não se move de acordo com os cenários que traçaram, para poderem ter razão.",
             "A maior virtude que um bom político deve ter é o caráter. É o fundamental. Mais que coragem, mais que tudo o resto deve ter caráter.",
             "A minha maior ambição política é não ter ambição política nenhuma.",
-            "Ser professor significa não envelhecer, contactar com gerações sempre diferentes - com problemas diversos ou com os mesmos problemas mas colocados de forma diversa - o ter de muda métodos, ter de mudar formas de aproximação dos problemas."]
+            "Ser professor significa não envelhecer, contactar com gerações sempre diferentes - com problemas diversos ou com os mesmos problemas mas colocados de forma diversa - o ter de mudar métodos, ter de mudar formas de aproximação dos problemas."]
 info = open("info.txt", "r")
 info = info.read().splitlines()
 reddit = praw.Reddit(client_id=info[0],
