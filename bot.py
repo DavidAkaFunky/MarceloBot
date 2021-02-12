@@ -20,15 +20,13 @@ async def on_ready():
     print('Entrei com o nome {0.user}!'.format(client))
 
 @client.command()
-async def join(ctx: discord.ext.commands.context.Context):
-    """
-    Bot joins voice channel
-    """
+async def entra(ctx: discord.ext.commands.context.Context):
+    """Bot entra no voice channel"""
     if ctx.author.voice and ctx.author.voice.channel:
         if  ctx.voice_client is None:  #if bot is not connect to a voice channel, connects
             channel = ctx.author.voice.channel
             await channel.connect()
-        else:        #if it is, joins the author voice channel instead
+        else:        #if it is, entras the author voice channel instead
             if ctx.voice_client.channel != ctx.author.voice.channel:
                 await ctx.voice_client.move_to(ctx.author.voice.channel)
 
@@ -61,9 +59,12 @@ async def fala(ctx):
 
 @client.command()
 async def vitória(ctx):
-    await join(ctx)
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    voice.play(discord.FFmpegPCMAudio("Vitória.mp3"))
+    try:
+        await entra(ctx)
+        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+        voice.play(discord.FFmpegPCMAudio("Vitória.mp3"))
+    except:
+        pass
 
 @client.command()
 async def selfie(ctx):
@@ -71,5 +72,23 @@ async def selfie(ctx):
     i = random.randint(0, len(selfies) - 1)
     await ctx.send(file=discord.File("Selfies/" + selfies[i]))
 
+#@client.command()
+#async def com(ctx):
+    # Pegar em foto do Marcelo com outra pessoa
+    # Usar módulo de IA para encontrar a cara(???)
+    # Substituir com montagem (somehow)
+    # Profit
+
+@client.command()
+async def canta(ctx):
+    """Canta Baka Mitai"""
+    try:
+        await entra(ctx)
+        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+        voice.play(discord.FFmpegPCMAudio("Marcelo Baka Mitai.mp3"))
+        channel = ctx.message.channel
+        await channel.send("https://imgur.com/a/O9Bbiju", delete_after=27.5)
+    except:
+        pass
 
 client.run(info[3])
