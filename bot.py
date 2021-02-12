@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import praw
 import random
-import ffmpeg
 
 client = commands.Bot(command_prefix='marcelo ')
 citações = ["Um comentador é tanto melhor quanto estuda e se informa dos temas e melhor comunica. Até porque a ideia de querer acertar à força leva a que os comentadores se irritem com a realidade, quando ela não se move de acordo com os cenários que traçaram, para poderem ter razão.",
