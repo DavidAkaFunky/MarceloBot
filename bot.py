@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 import praw
 import random
+import ctypes
+import ctypes.util
 
 client = commands.Bot(command_prefix='marcelo ')
 citações = ["Um comentador é tanto melhor quanto estuda e se informa dos temas e melhor comunica. Até porque a ideia de querer acertar à força leva a que os comentadores se irritem com a realidade, quando ela não se move de acordo com os cenários que traçaram, para poderem ter razão.",
@@ -13,10 +15,18 @@ info = info.read().splitlines()
 reddit = praw.Reddit(client_id=info[0],
                      client_secret=info[1],
                      user_agent=info[2])
-
-discord.opus.load_opus('opus') #Para o Heroku
-if not discord.opus.is_loaded():
-    raise RunTimeError('Opus failed to load')
+ 
+print("ctypes - Find opus:")
+a = ctypes.util.find_library('opus')
+print(a)
+ 
+print("Discord - Load Opus:")
+b = discord.opus.load_opus(a)
+print(b)
+ 
+print("Discord - Is loaded:")
+c = discord.opus.is_loaded()
+print(c)
 
 @client.event
 async def on_ready():
