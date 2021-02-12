@@ -14,7 +14,7 @@ reddit = praw.Reddit(client_id=info[0],
                      client_secret=info[1],
                      user_agent=info[2])
 
-discord.opus.load_opus() #Para o Heroku
+discord.opus.load_opus('opus') #Para o Heroku
 if not discord.opus.is_loaded():
     raise RunTimeError('Opus failed to load')
 
