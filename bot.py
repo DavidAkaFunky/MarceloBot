@@ -17,11 +17,11 @@ reddit = praw.Reddit(client_id=info[0],
 
 @client.event
 async def on_ready():
-    print('Entrei com o nome {0.user}!'.format(client))
+    print("Entrei com o nome {0.user}!".format(client))
 
 @client.command()
 async def entra(ctx: discord.ext.commands.context.Context):
-    """Bot entra no voice channel"""
+    """Entra no voice channel"""
     if ctx.author.voice and ctx.author.voice.channel:
         if  ctx.voice_client is None:  #if bot is not connect to a voice channel, connects
             channel = ctx.author.voice.channel
@@ -31,11 +31,12 @@ async def entra(ctx: discord.ext.commands.context.Context):
                 await ctx.voice_client.move_to(ctx.author.voice.channel)
 
     else:
-        await ctx.send("Caro amigo, tens de entrar num voice chat primeiro! ;)")
+        await ctx.send("Car@ amig@, tens de entrar num voice chat primeiro! ;)")
         return
 
 @client.command()
 async def olá(ctx):
+    """Cumprimenta"""
     await ctx.send('Saudações, car@ amig@!')
 
 async def redditFetch(ctx, nome):
@@ -47,18 +48,22 @@ async def redditFetch(ctx, nome):
 
 @client.command()
 async def aww(ctx):
+    """Mostra uma foto fofa"""
     await redditFetch(ctx, "aww")
 
 @client.command()
 async def meme(ctx):
+    """Mostra um wholesome meme"""
     await redditFetch(ctx, "wholesomememes")
 
 @client.command()
 async def fala(ctx):
+    """Mostra uma citação do Prof. Marcelo"""
     await ctx.send(citações[random.randint(0, len(citações) - 1)])
 
 @client.command()
 async def vitória(ctx):
+    """Conseguimos! Portugal, Lisboa, esperávamos, desejávamos, conseguimos, vitória!"""
     try:
         await entra(ctx)
         voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
@@ -68,6 +73,7 @@ async def vitória(ctx):
 
 @client.command()
 async def selfie(ctx):
+    """Mostra uma selfie do Marcelo (Técnico incluído!)"""
     selfies = listdir("Selfies")
     i = random.randint(0, len(selfies) - 1)
     await ctx.send(file=discord.File("Selfies/" + selfies[i]))
@@ -90,5 +96,17 @@ async def canta(ctx):
         await channel.send("https://imgur.com/a/O9Bbiju", delete_after=27.5)
     except:
         pass
+
+@client.command()
+async def sai(ctx):
+    """Sai do canal em que a pessoa está"""
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice is not None:
+        if voice.is_connected():
+            await voice.disconnect()
+        else:
+            await ctx.send("Car@ amig@, tenho de estar num voice chat para poder sair! XD")
+    else:
+        await ctx.send("Oops...")
 
 client.run(info[3])
