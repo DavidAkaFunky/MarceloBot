@@ -19,7 +19,6 @@ reddit = praw.Reddit(client_id=info[0],
 async def on_ready():
     print("Entrei com o nome {0.user}!".format(client))
 
-@client.command()
 async def entra(ctx: discord.ext.commands.context.Context):
     """Entra no voice channel"""
     if ctx.author.voice and ctx.author.voice.channel:
@@ -40,6 +39,7 @@ async def olá(ctx):
     await ctx.send('Saudações, car@ amig@!')
 
 async def redditFetch(ctx, nome):
+    """Recolhe um post do subreddit dado por nome"""
     posts = reddit.subreddit(nome).hot()
     post = random.randint(1, 100)
     for i in range(0, post):
@@ -57,19 +57,30 @@ async def meme(ctx):
     await redditFetch(ctx, "wholesomememes")
 
 @client.command()
-async def fala(ctx):
+async def escreve(ctx):
     """Mostra uma citação do Prof. Marcelo"""
     await ctx.send(citações[random.randint(0, len(citações) - 1)])
 
 @client.command()
-async def vitória(ctx):
-    """Conseguimos! Portugal, Lisboa, esperávamos, desejávamos, conseguimos, vitória!"""
+async def fala(ctx, ficheiro):
+    """Abre o ficheiro dado"""
     try:
         await entra(ctx)
         voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-        voice.play(discord.FFmpegPCMAudio("Vitória.mp3"))
+        voice.play(discord.FFmpegPCMAudio(ficheiro))
+        await sai(ctx)
     except:
         pass
+
+@client.command()
+async def vitória(ctx):
+    """Conseguimos! Portugal, Lisboa, esperávamos, desejávamos, conseguimos, vitória!"""
+    await fala(ctx, "Vitória.mp3")
+
+@client.command()
+async def beija(ctx):
+    """Beijar! Ahhhh..."""
+    await fala(ctx, "Beijar.mp3")
 
 @client.command()
 async def selfie(ctx):
@@ -94,10 +105,10 @@ async def canta(ctx):
         voice.play(discord.FFmpegPCMAudio("Marcelo Baka Mitai.mp3"))
         channel = ctx.message.channel
         await channel.send("https://imgur.com/a/O9Bbiju", delete_after=27.5)
+        await sai(ctx)
     except:
         pass
 
-@client.command()
 async def sai(ctx):
     """Sai do canal em que a pessoa está"""
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
