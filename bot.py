@@ -112,6 +112,8 @@ async def canta(ctx):
 async def sai(ctx):
     """Sai do canal em que a pessoa está"""
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    while voice.is_connected:
+        sleep(0.1) #Não funciona ainda!
     if voice is not None:
         if voice.is_connected():
             await voice.disconnect()
