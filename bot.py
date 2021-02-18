@@ -3,6 +3,8 @@ from discord.ext import commands
 import praw
 import random
 from os import listdir
+from time import sleep
+from mutagen.mp3 import MP3
 
 client = commands.Bot(command_prefix='marcelo ')
 citações = ["Um comentador é tanto melhor quanto estuda e se informa dos temas e melhor comunica. Até porque a ideia de querer acertar à força leva a que os comentadores se irritem com a realidade, quando ela não se move de acordo com os cenários que traçaram, para poderem ter razão.",
@@ -15,6 +17,9 @@ reddit = praw.Reddit(client_id=info[0],
                      client_secret=info[1],
                      user_agent=info[2])
 
+def tempo(ficheiro):
+    return int(MP3(ficheiro).info.length)
+
 @client.event
 async def on_ready():
     print("Entrei com o nome {0.user}!".format(client))
@@ -22,10 +27,10 @@ async def on_ready():
 async def entra(ctx: discord.ext.commands.context.Context):
     """Entra no voice channel"""
     if ctx.author.voice and ctx.author.voice.channel:
-        if  ctx.voice_client is None:  #if bot is not connect to a voice channel, connects
+        if  ctx.voice_client is None:
             channel = ctx.author.voice.channel
             await channel.connect()
-        else:        #if it is, entras the author voice channel instead
+        else:
             if ctx.voice_client.channel != ctx.author.voice.channel:
                 await ctx.voice_client.move_to(ctx.author.voice.channel)
 
@@ -66,9 +71,8 @@ async def fala(ctx, ficheiro):
     """Abre o ficheiro dado"""
     try:
         await entra(ctx)
-        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+        voice = discord.utils.get(client.voice_clients, guild = ctx.guild)
         voice.play(discord.FFmpegPCMAudio(ficheiro))
-        await sai(ctx)
     except:
         pass
 
@@ -100,20 +104,19 @@ async def selfie(ctx):
 async def canta(ctx):
     """Canta Baka Mitai"""
     try:
-        await entra(ctx)
-        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-        voice.play(discord.FFmpegPCMAudio("Marcelo Baka Mitai.mp3"))
+        await entra(ctx) #Deveria ser redundante, mas é usado para evitar delay
         channel = ctx.message.channel
-        await channel.send("https://imgur.com/a/O9Bbiju", delete_after=27.5)
-        await sai(ctx)
+        await channel.send("https://imgur.com/a/O9Bbiju", delete_after = 27.5)
+        await fala(ctx, "Marcelo Baka Mitai.mp3")
     except:
         pass
 
+@client.command()
 async def sai(ctx):
-    """Sai do canal em que a pessoa está"""
+    """Sai do canal em que a pessoa está
+       Eventualmente, tornar-se-á redundante,
+       uma vez que o objetivo é fazê-lo sair sozinho"""
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    while voice.is_connected:
-        sleep(0.1) #Não funciona ainda!
     if voice is not None:
         if voice.is_connected():
             await voice.disconnect()
