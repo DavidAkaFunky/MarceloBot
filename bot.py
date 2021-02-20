@@ -106,7 +106,7 @@ async def canta(ctx):
     try:
         await entra(ctx) #Deveria ser redundante, mas é usado para evitar delay
         channel = ctx.message.channel
-        await channel.send("https://imgur.com/a/O9Bbiju", delete_after = 27.5)
+        await channel.send("https://gph.is/g/EvWbGoY", delete_after = 27.5)
         await fala(ctx, "Marcelo Baka Mitai.mp3")
     except:
         pass
