@@ -35,7 +35,12 @@ class Imagem (commands.Cog):
         """Mostra uma selfie do Marcelo (Técnico incluído!)"""
         selfies = listdir("Selfies")
         i = randint(0, len(selfies) - 1)
-        await ctx.send(file=discord.File("Selfies/" + selfies[i]))
+        await ctx.send(file=discord.File("Fotos/Selfies/" + selfies[i]))
+    
+    @commands.command()
+    async def vacina(self, ctx):
+        """Marcelo a ser vacinado"""
+        await ctx.send(file=discord.File("Fotos/Vacina.png"))
 
 def setup(bot):
     bot.add_cog(Imagem(bot))
