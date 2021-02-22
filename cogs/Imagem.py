@@ -33,7 +33,7 @@ class Imagem (commands.Cog):
     @commands.command()
     async def selfie(self, ctx):
         """Mostra uma selfie do Marcelo (Técnico incluído!)"""
-        selfies = listdir("Selfies")
+        selfies = listdir("Fotos/Selfies")
         i = randint(0, len(selfies) - 1)
         await ctx.send(file=discord.File("Fotos/Selfies/" + selfies[i]))
     
