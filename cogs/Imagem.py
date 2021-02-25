@@ -2,15 +2,13 @@ import discord
 from discord.ext import commands
 from random import randint
 import praw
-from os import listdir
+from os import listdir, environ
 
 class Imagem (commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        info = open("info.txt", "r")
-        info = info.read().splitlines()
-        self.reddit = praw.Reddit(client_id=info[0], client_secret=info[1], user_agent=info[2])
+        self.reddit = praw.Reddit(client_id=environ["REDDIT_CLIENT_ID"], client_secret=environ["REDDIT_CLIENT_SECRET"], user_agent=environ["REDDIT_USER_AGENT"])
 
     async def redditFetch(self, ctx, nome):
         """Recolhe um post do subreddit dado por nome"""
