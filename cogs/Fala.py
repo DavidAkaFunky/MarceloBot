@@ -28,8 +28,8 @@ class Fala (commands.Cog):
         voice = discord.utils.get(self.bot.voice_clients, guild = ctx.guild)
         voice.play(discord.FFmpegPCMAudio(ficheiro))
     
-    @commands.command()
-    async def vitória(self, ctx):
+    @commands.command(alias="vitória")
+    async def vitoria(self, ctx):
         """Conseguimos! Portugal, Lisboa, esperávamos, desejávamos, conseguimos, vitória!"""
         await self.fala(ctx, "Sons/Vitória.mp3")
 

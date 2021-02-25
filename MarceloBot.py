@@ -6,7 +6,7 @@ load_dotenv()
 
 extensions = ["cogs.Escreve", "cogs.Fala", "cogs.Imagem", "cogs.Eventos"]
 
-client = commands.Bot(command_prefix='marcelo ')
+client = commands.Bot(command_prefix='marcelo ', case_insensitive = True)
 
 for ext in extensions:
     client.load_extension(ext)
