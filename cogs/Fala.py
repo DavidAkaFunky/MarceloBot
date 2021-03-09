@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from time import sleep
-
+from random import randint
 
 class Fala (commands.Cog):
 
@@ -66,11 +66,15 @@ class Fala (commands.Cog):
     @commands.command()
     async def volta(self, ctx: discord.ext.commands.context.Context):
         """Volta, Marcelo :'("""
-        if ctx.author.voice and ctx.author.voice.channel:
-            if ctx.voice_client is None:
-                await ctx.send("Não volto kkkkk TROLLEI")
-            else:
-                await ctx.send("Mas eu já estou cá lmao") 
+        post = randint(0, 1)
+        if post:
+            if ctx.author.voice and ctx.author.voice.channel:
+                if ctx.voice_client is None:
+                    await ctx.send("Não volto kkkkk TROLLEI")
+                else:
+                    await ctx.send("Mas eu já estou cá lmao")
+        else:
+            await self.entra(ctx)
 
 def setup(bot):
     bot.add_cog(Fala(bot))
