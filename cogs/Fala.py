@@ -28,7 +28,7 @@ class Fala (commands.Cog):
         voice = discord.utils.get(self.bot.voice_clients, guild = ctx.guild)
         voice.play(discord.FFmpegPCMAudio(ficheiro))
     
-    @commands.command(alias="vitória")
+    @commands.command(aliases=["vitória"])
     async def vitoria(self, ctx):
         """Conseguimos! Portugal, Lisboa, esperávamos, desejávamos, conseguimos, vitória!"""
         await self.fala(ctx, "Sons/Vitória.mp3")
@@ -62,6 +62,15 @@ class Fala (commands.Cog):
                 await ctx.send("Car@ amig@, tenho de estar num voice chat para poder sair! XD")
         else:
             await ctx.send("Oops...")
+
+    @commands.command()
+    async def volta(self, ctx: discord.ext.commands.context.Context):
+        """Volta, Marcelo :'("""
+        if ctx.author.voice and ctx.author.voice.channel:
+            if ctx.voice_client is None:
+                await ctx.send("Não volto kkkkk TROLLEI")
+            else:
+                await ctx.send("Mas eu já estou cá lmao") 
 
 def setup(bot):
     bot.add_cog(Fala(bot))

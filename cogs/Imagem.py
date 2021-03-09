@@ -44,6 +44,11 @@ class Imagem (commands.Cog):
     async def dab(self, ctx):
         """Marcelo faz um dab"""
         await ctx.send(file=discord.File("Fotos/Dab.jpg"))
+    
+    @commands.command()
+    async def salva(self, ctx):
+        """Marcelo salvavidas!"""
+        await ctx.send(file=discord.File("Fotos/Salva.png"))
 
 def setup(bot):
     bot.add_cog(Imagem(bot))

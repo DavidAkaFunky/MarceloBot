@@ -22,7 +22,7 @@ class Escreve (commands.Cog):
                     "Se [a função do Presidente da República] for vivida com alegria, melhor. Se for vivida com cara de cemitério é menos bom mas pode ser que dê resultado, dar esperança com cara fúnebre."]
         await ctx.send(citações[randint(0, len(citações) - 1)])
 
-    @commands.command(alias="olá")
+    @commands.command(aliases=["olá"])
     async def ola(self, ctx):
         """Cumprimenta"""
         await ctx.send('Saudações, car@ amig@!')
