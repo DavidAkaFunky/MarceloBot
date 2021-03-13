@@ -2,7 +2,12 @@
 
 Bot do Marcelo Rebelo de Sousa ^_^ _O seu propósito meramente humorístico!_
 
+## Chamar o Bot
+
+Para chamar o bot, copia o seguinte link: https://discord.com/oauth2/authorize?client_id=809537182851268668&permissions=8&scope=bot
+
 ## Comandos
+
 Para usar o bot, basta escrever "marcelo " e uma das seguintes palavras:
 
 ### Escreve
