@@ -1,6 +1,6 @@
 # MarceloBot
 
-Bot do Marcelo Rebelo de Sousa ^_^ _O seu propósito meramente humorístico!_
+Bot do Marcelo Rebelo de Sousa ^_^ _O seu propósito é meramente humorístico!_
 
 ## Chamar o Bot
 
